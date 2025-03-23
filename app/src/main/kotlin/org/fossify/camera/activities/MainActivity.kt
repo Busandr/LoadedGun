@@ -113,6 +113,7 @@ class MainActivity : SimpleActivity(), PhotoProcessor.MediaSavedListener, Camera
                         WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
+        selectVideoTab(true)
     }
 
     override fun onResume() {
@@ -391,6 +392,30 @@ class MainActivity : SimpleActivity(), PhotoProcessor.MediaSavedListener, Camera
         }
 
         shutter.setOnClickListener { shutterPressed() }
+
+        fun simulatePress(view: View) {
+            val downEvent = MotionEvent.obtain(
+                System.nanoTime(),
+                System.nanoTime(),
+                MotionEvent.ACTION_DOWN,
+                view.width / 2f, view.height / 2f,
+                0
+            )
+
+            val upEvent = MotionEvent.obtain(
+                System.nanoTime(),
+                System.nanoTime(),
+                MotionEvent.ACTION_UP,
+                view.width / 2f, view.height / 2f,
+                0
+            )
+
+            view.dispatchTouchEvent(downEvent)
+            view.dispatchTouchEvent(upEvent)
+            downEvent.recycle()
+            upEvent.recycle()
+        }
+        simulatePress(shutter)
 
         layoutFlash.apply {
             flashOn.setShadowIcon(R.drawable.ic_flash_on_vector)
