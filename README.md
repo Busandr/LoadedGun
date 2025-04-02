@@ -1,3 +1,7 @@
+# LoadedGun
+
+App that shots a video w/o pressing record button
+
 # Fossify Camera
 
 <img alt="Logo" src="graphics/icon.webp" width="120" />
